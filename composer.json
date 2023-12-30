@@ -1,0 +1,19 @@
+{
+    "name": "jayp/app-php-catalog-video",
+    "description": "App With PHP - Catalog Video",
+    "authors": [
+        {
+            "name": "Joao Pereira",
+            "email": "joaovitorpereiramartins.2004@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "mockery/mockery": "^1.6"
+    }
+}
