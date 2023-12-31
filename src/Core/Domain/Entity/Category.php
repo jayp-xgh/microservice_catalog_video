@@ -46,7 +46,7 @@ class Category
             throw new EntityValidationException('Description  is required');
         }
 
-        if ($this->description != '' && (strlen($this->description) > 255 || strlen($this->description) <= 3)) {
+        if ($this->description != '' && strlen($this->description) > 255 && strlen($this->description) <= 3) {
             throw new EntityValidationException('Description  is required');
         }
     }    
