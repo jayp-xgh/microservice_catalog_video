@@ -56,7 +56,7 @@ class CategoryUnitTest extends TestCase
     public function testExceptionName()
     {
         try {
-            $category = new Category(
+            new Category(
                 name: 'N',
                 description: 'New description',
             );
