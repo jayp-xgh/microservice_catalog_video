@@ -10,7 +10,7 @@ class DomainValidation
         string $value,
         string $execptionMessage = null
     ): void
-    {   
+    {
         if (empty($value))
             throw new EntityValidationException($execptionMessage ?? 'Should not be empty or null');
     }
