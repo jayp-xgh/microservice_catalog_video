@@ -26,7 +26,7 @@ class DomainValidation
 
     public static function strMinLangth(
         string $value,
-        int $langth = 2,
+        int $langth = 3,
         string $execptionMessage = null)
     {
         if (strlen($value) < $langth)
