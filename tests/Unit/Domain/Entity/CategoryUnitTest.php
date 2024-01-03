@@ -22,6 +22,7 @@ class CategoryUnitTest extends TestCase
         $this->assertEquals('New name', $category->name);
         $this->assertEquals('New description', $category->description);
         $this->assertEquals(true, $category->isActive);
+        $this->assertNotEmpty($category->createdAt());
     }
 
     public function testActivated()
@@ -44,7 +45,8 @@ class CategoryUnitTest extends TestCase
             id: $uuid,
             name: 'New name',
             description: 'New description',
-            isActive: true
+            isActive: true,
+            createdAt: '2023-01-01 00:00:00'
         );
 
         $category->update(
@@ -64,13 +66,11 @@ class CategoryUnitTest extends TestCase
                 name: 'Ne',
                 description: 'New description',
             );
-
             $this->assertTrue(false);
         } catch (Throwable $th) {
             $this->assertInstanceOf(EntityValidationException::class, $th);
         }
     }
-
     public function testExceptionDescription()
     {
         try {
