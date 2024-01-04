@@ -18,9 +18,7 @@ class CreateCategoryUseCase
     {
         $category = new Category(
             name: 'Category 1',
-            description: 'Description 1',
         );
-        var_dump($category);
         $this->categoryRepository->insert($category);
     }
 }
