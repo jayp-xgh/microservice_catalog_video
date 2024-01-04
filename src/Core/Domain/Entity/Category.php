@@ -1,6 +1,7 @@
 <?php
 
 namespace Core\Domain\Entity;
+
 use Core\Domain\Entity\Traits\MethodsMagicsTrait;
 use Core\Domain\Validation\DomainValidation;
 use Core\Domain\ValueObject\Uuid;

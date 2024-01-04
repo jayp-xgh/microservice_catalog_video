@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Core\Domain\Repository;
+namespace Core\Domain\Repository;
 
 use Core\Domain\Entity\Category;
 
