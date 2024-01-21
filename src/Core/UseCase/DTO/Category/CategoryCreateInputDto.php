@@ -9,5 +9,4 @@ class CategoryCreateInputDto
         public string $description = '',
         public bool $isActive = true,
     ) {}
-
 }

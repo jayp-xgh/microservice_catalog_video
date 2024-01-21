@@ -12,12 +12,11 @@ use Core\UseCase\DTO\Category\{
 class CreateCategoryUseCase
 {
     protected $categoryRepository;
-
     public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }
-
+    
     public function execute(CategoryCreateInputDto $input): CategoryCreateOutputDto
     {
         $category = new Category(
