@@ -16,7 +16,7 @@ class CreateCategoryUseCase
     {
         $this->categoryRepository = $categoryRepository;
     }
-    
+
     public function execute(CategoryCreateInputDto $input): CategoryCreateOutputDto
     {
         $category = new Category(
