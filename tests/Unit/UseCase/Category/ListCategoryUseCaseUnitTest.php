@@ -4,6 +4,7 @@ namespace Tests\Unit\UseCase\Category;
 
 use Core\Domain\Entity\Category as CategoryEntity;
 use Core\Domain\Repository\CategoryRepositoryInterface;
+use Core\UseCase\DTO\Category\CategoryCreateOutputDto;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -13,9 +14,9 @@ class ListCategoryCaseUnitTest extends TestCase
 {
     public function testGetById()
     {
-        $uuid = (string) Uuid::uuid4()->toString();
+        $id = (string) Uuid::uuid4()->toString();
         $this->mockEntity = Mockery::mock(CategoryEntity::class, [
-            $uuid,
+            $id,
             'Name Category',
         ]);
 
@@ -23,5 +24,14 @@ class ListCategoryCaseUnitTest extends TestCase
         $this->mockRepository->shouldReceive('findById')
             ->with($id)
             ->andReturn($this->mockEntity);
+
+        $this->mockInputDto = Mockery::mock(CategoryInputDto::class, [
+            'id' => $id,
+        ]);
+        $useCase = new ListCategoryUseCase($this->mockRepository);
+        $response = $useCase->execute($this->mockInputDto);
+        $this->assertInstanceOf(CategoryCreateOutputDto::class, $response);
+        $this->assertEquals('Name Category', $response->name);
+        $this->assertEquals($id, $response->id);
     }
 }
