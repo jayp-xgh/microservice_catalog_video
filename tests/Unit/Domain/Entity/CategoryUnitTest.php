@@ -32,7 +32,7 @@ class CategoryUnitTest extends TestCase
         );
 
         $this->assertTrue($category->isActive);
-        $category->desablet();
+        $category->disable();
         $this->assertFalse($category->isActive);
     }
 

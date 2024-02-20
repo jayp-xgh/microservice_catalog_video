@@ -2,38 +2,30 @@
 
 namespace Core\UseCase\Category;
 
-
-use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Entity\Category;
-use Core\UseCase\DTO\Category\{
-    CategoryCreateInputDto,
-    CategoryCreateOutputDto,
-};
+use Core\Domain\Repository\CategoryRepositoryInterface;
+use Core\UseCase\DTO\Category\CategoryInputDto;
+use Core\UseCase\DTO\Category\CategoryOutputDto;
 
-
-class ListCategoryCase
+class ListCategoryUseCase
 {
-    protected $categoryRepository;
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    protected $repository;
+
+    public function __construct(CategoryRepositoryInterface $repository)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->repository = $repository;
     }
 
-    public function execute(CategoryCreateInputDto $input): CategoryCreateOutputDto
+    public function execute(CategoryInputDto $input): CategoryOutputDto
     {
-        $category = new Category(
-            name: $input->name,
-            description: $input->description,
-            isActive: $input->isActive,
-        );
+        $category = $this->repository->findById($input->id);
 
-        $newlyInsertedCategory = $this->categoryRepository->insert($category);
-
-        return new CategoryCreateOutputDto(
-            id: $newlyInsertedCategory->id,
-            name: $newlyInsertedCategory->name,
-            description: $newlyInsertedCategory->description,
-            is_active: $newlyInsertedCategory->isActive,
+        return new CategoryOutputDto(
+            id: $category->id(),
+            name: $category->name,
+            description: $category->description,
+            is_active: $category->isActive,
+            created_at: $category->createdAt(),
         );
     }
 }

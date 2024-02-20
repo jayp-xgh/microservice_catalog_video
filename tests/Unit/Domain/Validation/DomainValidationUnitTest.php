@@ -32,7 +32,7 @@ class DomainValidationUnitTest extends TestCase
     public function testStrMaxLangth()
     {
         try {
-            DomainValidation::strMaxLangth('12345', 5, 'Custom message error');
+            DomainValidation::strMaxLength('12345', 5, 'Custom message error');
             $this->assertTrue(false);
         } catch (Throwable $th) {
             $this->assertInstanceOf(EntityValidationException::class, $th);
@@ -42,7 +42,7 @@ class DomainValidationUnitTest extends TestCase
     public function testStrMinLangth()
     {
         try {
-            DomainValidation::strMinLangth('1', 2, 'Custom message error');
+            DomainValidation::strMinLength('1', 2, 'Custom message error');
             $this->assertTrue(false);
         } catch (Throwable $th) {
             $this->assertInstanceOf(EntityValidationException::class, $th);
@@ -52,7 +52,7 @@ class DomainValidationUnitTest extends TestCase
     public function testStrCanNullAndMaxLangth()
     {
         try {
-            DomainValidation::strCanNullAndMaxLangth('1234', 3, 'Custom message error');
+            DomainValidation::strCanNullAndMaxLength('1234', 3, 'Custom message error');
             $this->assertTrue(false);
         } catch (Throwable $th) {
             $this->assertInstanceOf(EntityValidationException::class, $th, 'Custom message error');

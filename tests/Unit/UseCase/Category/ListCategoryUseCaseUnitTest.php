@@ -4,21 +4,27 @@ namespace Tests\Unit\UseCase\Category;
 
 use Core\Domain\Entity\Category as CategoryEntity;
 use Core\Domain\Repository\CategoryRepositoryInterface;
-use Core\UseCase\DTO\Category\CategoryCreateOutputDto;
+use Core\UseCase\Category\ListCategoryUseCase;
+use Core\UseCase\DTO\Category\CategoryInputDto;
+use Core\UseCase\DTO\Category\CategoryOutputDto;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use stdClass;
 
-class ListCategoryCaseUnitTest extends TestCase
+class ListCategoryUseCaseUnitTest extends TestCase
 {
     public function testGetById()
     {
         $id = (string) Uuid::uuid4()->toString();
+
         $this->mockEntity = Mockery::mock(CategoryEntity::class, [
             $id,
             'Name Category',
         ]);
+
+        $this->mockEntity->shouldReceive('id')->andReturn($id);
+        $this->mockEntity->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
 
         $this->mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
         $this->mockRepository->shouldReceive('findById')
@@ -26,12 +32,27 @@ class ListCategoryCaseUnitTest extends TestCase
             ->andReturn($this->mockEntity);
 
         $this->mockInputDto = Mockery::mock(CategoryInputDto::class, [
-            'id' => $id,
+            $id,
         ]);
+
         $useCase = new ListCategoryUseCase($this->mockRepository);
         $response = $useCase->execute($this->mockInputDto);
-        $this->assertInstanceOf(CategoryCreateOutputDto::class, $response);
+
+        $this->assertInstanceOf(CategoryOutputDto::class, $response);
         $this->assertEquals('Name Category', $response->name);
         $this->assertEquals($id, $response->id);
+
+        // Spies
+        $this->spy = Mockery::spy(stdClass::class, CategoryRepositoryInterface::class);
+        $this->spy->shouldReceive('findById')->with($id)->andReturn($this->mockEntity);
+        $useCase = new ListCategoryUseCase($this->spy);
+        $response = $useCase->execute($this->mockInputDto);
+        $this->spy->shouldHaveReceived('findById');
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
     }
 }

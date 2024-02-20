@@ -18,7 +18,7 @@ class Category
         protected bool $isActive = true,
         protected DateTime|string $createdAt = '',
     ) {
-        $this->id = $this->id ? new Uuid($this->id) : Uuid::generate();
+        $this->id = $this->id ? new Uuid($this->id) : Uuid::random();
         $this->createdAt = $this->createdAt ? new DateTime($this->createdAt) : new DateTime();
         $this->validate();
     }
@@ -28,25 +28,22 @@ class Category
         $this->isActive = true;
     }
 
-    public function desablet(): void
+    public function disable(): void
     {
         $this->isActive = false;
     }
 
-    public function update(
-        string $name = '',
-        string $description = ''
-    ): void
+    public function update(string $name, string $description = '')
     {
         $this->name = $name;
         $this->description = $description;
         $this->validate();
     }
 
-    private function validate ()
+    protected function validate ()
     {
-        DomainValidation::strMaxLangth($this->name);
-        DomainValidation::strMinLangth($this->name);
-        DomainValidation::strCanNullAndMaxLangth($this->description);
+        DomainValidation::strMaxLength($this->name);
+        DomainValidation::strMinLength($this->name);
+        DomainValidation::strCanNullAndMaxLength($this->description);
     }
 }

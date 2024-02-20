@@ -15,12 +15,12 @@ trait MethodsMagicsTrait
         throw new Exception("Property {$property} not found in class {$className}");
     }
 
-    public function id (): string
+    public function id(): string
     {
         return (string) $this->id;
     }
 
-    public function createdAt (): string
+    public function createdAt(): string
     {
         return $this->createdAt->format('Y-m-d H:i:s');
     }
