@@ -19,15 +19,21 @@ class ListCategoriesUseCase
     public function execute(ListCategoriesInputDto $input): ListCategoriesOutputDto
     {
         $categories = $this->repository->paginate(
-            filter: $input->filter,
-            order: $input->order,
-            page: $input->page,
+            filter   : $input->filter,
+            order    : $input->order,
+            page     : $input->page,
             totalPage: $input->totalPage,
         );
 
         return new ListCategoriesOutputDto(
-            items: $categories->items(),
-            total: $categories->total(),
+            items      : $categories->items(),
+            total      : $categories->total(),
+            firstPage  : $categories->firstPage(),
+            lastPage   : $categories->lastPage(),
+            currentPage: $categories->currentPage(),
+            perPage    : $categories->perPage(),
+            to         : $categories->to(),
+            from       : $categories->from(),
         );
     }
 }
