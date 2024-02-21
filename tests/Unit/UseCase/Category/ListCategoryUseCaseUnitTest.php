@@ -14,6 +14,11 @@ use stdClass;
 
 class ListCategoryUseCaseUnitTest extends TestCase
 {
+    protected $mockRepository;
+    protected $mockEntity;
+    protected $mockInputDto;
+    protected $spy;
+
     public function testGetById()
     {
         $id = (string) Uuid::uuid4()->toString();
@@ -26,7 +31,7 @@ class ListCategoryUseCaseUnitTest extends TestCase
         $this->mockEntity->shouldReceive('id')->andReturn($id);
         $this->mockEntity->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
 
-        $this->mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
+        $this->mockRepository = Mockery::mock(CategoryRepositoryInterface::class);
         $this->mockRepository->shouldReceive('findById')
             ->with($id)
             ->andReturn($this->mockEntity);
@@ -43,7 +48,7 @@ class ListCategoryUseCaseUnitTest extends TestCase
         $this->assertEquals($id, $response->id);
 
         // Spies
-        $this->spy = Mockery::spy(stdClass::class, CategoryRepositoryInterface::class);
+        $this->spy = Mockery::spy(CategoryRepositoryInterface::class);
         $this->spy->shouldReceive('findById')->with($id)->andReturn($this->mockEntity);
         $useCase = new ListCategoryUseCase($this->spy);
         $response = $useCase->execute($this->mockInputDto);

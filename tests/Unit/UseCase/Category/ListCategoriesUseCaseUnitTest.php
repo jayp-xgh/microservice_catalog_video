@@ -15,13 +15,17 @@ use stdClass;
 
 class ListCategoriesUseCaseUnitTest extends TestCase
 {
+    protected $mockRepo;
+    protected $mockPagination;
+    protected $mockInputDto;
+
     public function testListCategoriesEmpty()
     {
-        $this->mockPagination = Mockery::mock(stdClass::class, PaginationInterface::class);
+        $this->mockPagination = Mockery::mock(PaginationInterface::class);
         $this->mockPagination->shouldReceive('items')->andReturn([]);
         $this->mockPagination->shouldReceive('total')->andReturn(0);
 
-        $this->mockRepo = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
+        $this->mockRepo = Mockery::mock(CategoryRepositoryInterface::class);
         $this->mockRepo->shouldReceive('paginate')->andReturn($this->mockPagination);
 
         $this->mockInputDto = Mockery::mock(ListCategoriesInputDto::class, ['filter', 'desc']);
