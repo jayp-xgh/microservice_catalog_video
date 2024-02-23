@@ -1,9 +1,9 @@
 {
-    "name": "jayp/app-php-catalog-video",
+    "name"       : "jayp/app-php-catalog-video",
     "description": "App With PHP - Catalog Video",
-    "authors": [
+    "authors"    : [
         {
-            "name": "Joao Pereira",
+            "name" : "Joao Pereira",
             "email": "joaovitorpereiramartins.2004@gmail.com"
         }
     ],

@@ -20,18 +20,18 @@ class CreateCategoryUseCase
     public function execute(CategoryCreateInputDto $input): CategoryCreateOutputDto
     {
         $category = new Category(
-            name: $input->name,
+            name       : $input->name,
             description: $input->description,
-            isActive: $input->isActive,
+            isActive   : $input->isActive,
         );
 
         $newlyInsertedCategory = $this->categoryRepository->insert($category);
 
         return new CategoryCreateOutputDto(
-            id: $newlyInsertedCategory->id(),
-            name: $newlyInsertedCategory->name,
+            id         : $newlyInsertedCategory->id(),
+            name       : $newlyInsertedCategory->name,
             description: $newlyInsertedCategory->description,
-            is_active: $newlyInsertedCategory->isActive,
+            is_active  : $newlyInsertedCategory->isActive,
         );
     }
 }

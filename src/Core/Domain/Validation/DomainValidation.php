@@ -26,7 +26,7 @@ class DomainValidation
 
     public static function strMinLength(
         string $value,
-        int $langth = 3,
+        int    $langth           = 3,
         string $execptionMessage = null)
     {
         if (strlen($value) < $langth)
@@ -34,8 +34,8 @@ class DomainValidation
     }
 
     public static function strCanNullAndMaxLength(
-        string $value = '',
-        int $langth = 255,
+        string $value            = '',
+        int    $langth           = 255,
         string $execptionMessage = null)
     {
         if (!empty($value) && strlen($value) >  $langth)

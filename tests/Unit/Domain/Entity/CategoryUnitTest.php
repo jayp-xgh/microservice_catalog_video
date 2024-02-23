@@ -13,9 +13,9 @@ class CategoryUnitTest extends TestCase
     public function testAttributes()
     {
         $category = new Category(
-            name: 'New name',
+            name       : 'New name',
             description: 'New description',
-            isActive: true
+            isActive   : true
         );
 
         $this->assertNotEmpty($category->id);
@@ -42,15 +42,15 @@ class CategoryUnitTest extends TestCase
         $uuid = (string) Uuid::uuid4()->toString();
 
         $category = new Category(
-            id: $uuid,
-            name: 'New name',
+            id         : $uuid,
+            name       : 'New name',
             description: 'New description',
-            isActive: true,
-            createdAt: '2023-01-01 00:00:00'
+            isActive   : true,
+            createdAt  : '2023-01-01 00:00:00'
         );
 
         $category->update(
-            name: 'New_name',
+            name       : 'New_name',
             description: 'New_description',
         );
 
@@ -63,7 +63,7 @@ class CategoryUnitTest extends TestCase
     {
         try {
             new Category(
-                name: 'Ne',
+                name       : 'Ne',
                 description: 'New description',
             );
             $this->assertTrue(false);
@@ -75,7 +75,7 @@ class CategoryUnitTest extends TestCase
     {
         try {
             new Category(
-                name: 'Neme Cat',
+                name       : 'Neme Cat',
                 description: random_bytes(999),
             );
 
