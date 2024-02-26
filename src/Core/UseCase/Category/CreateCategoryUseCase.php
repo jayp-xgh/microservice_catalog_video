@@ -19,7 +19,7 @@ class CreateCategoryUseCase
 
     public function execute(CategoryCreateInputDto $input): CategoryCreateOutputDto
     {
-        $category = new Category(
+        new Category(
             name       : $input->name,
             description: $input->description,
             isActive   : $input->isActive,

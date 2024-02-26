@@ -64,7 +64,7 @@ class ListCategoriesUseCaseUnitTest extends TestCase
         $this->mockRepo = Mockery::mock(CategoryRepositoryInterface::class);
         $this->mockRepo->shouldReceive('paginate')->andReturn($mockPagination);
 
-        $this->mockInputDto = Mockery::mock(ListCategoriesInputDto::class, ['filter', 'desc']);
+        Mockery::mock(ListCategoriesInputDto::class, ['filter', 'desc']);
 
         $useCase = new ListCategoriesUseCase($this->mockRepo);
         $responseUseCase = $useCase->execute($this->mockInputDto);
